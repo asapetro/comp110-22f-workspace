@@ -7,6 +7,7 @@ WHITE_BOX: str = "\U00002B1C"
 GREEN_BOX: str = "\U0001F7E9"
 YELLOW_BOX: str = "\U0001F7E8"
 
+
 # differentiates yellow and white square outputs
 def contains_char(guess_word: str, single_char: str) -> bool:
     """Returns True if the single character of the second string is found at any index of the first string."""
@@ -21,6 +22,8 @@ def contains_char(guess_word: str, single_char: str) -> bool:
     # True is returned if guess_word contains single_char
     # otherwise False is returned
     return False
+
+
 # correct guess letters of correct position add green boxes to the string
 # correct guess letter and incorrect position add yellow boxes to string 
 # incorrect guess letter adds white box to the string
@@ -41,6 +44,8 @@ def emojified(guess_word: str, secret_word: str) -> str:
         count = count + 1
         # fully emojified guess word is returned
     return empty_string       
+
+
 # Int is inputed and the same length guess word is returned
 def input_guess(exp_length: int) -> str:
     """Returns the user's guess of the correct length to the caller."""
@@ -48,6 +53,8 @@ def input_guess(exp_length: int) -> str:
     while len(guess_word) != exp_length:
         guess_word = input(f"That wasn't {exp_length} chars! Try again:")
     return guess_word
+
+
 # secret word is assigned 
 def main() -> None:
     """The entrypoint of the program and main game loop."""
@@ -66,5 +73,7 @@ def main() -> None:
         turn_count += 1
     if guess != secret_word:
         print("X/6 - Sorry, try again tomorrow!")
+
+        
 if __name__ == "__main__":
     main()
