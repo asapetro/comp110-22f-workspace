@@ -5,6 +5,8 @@ points: int = 0
 player: str = ""
 from random import randint
 
+SMILE_FACE: str = "\U0001f600"
+LAME_FACE: str = "\U0001F612"
 
 def greet() -> None:
     """Greets player."""
@@ -17,7 +19,7 @@ def pie_qs() -> None:
     """Returns the user's score."""
     global points
     seasons_q: str = input("True or False: Fall is the best season? ")
-    if seasons_q is "True":
+    if seasons_q == "True":
         points += 200
     food_q: str = input("Waffles or Pancakes? ")
     if food_q == "Waffles":
@@ -36,15 +38,15 @@ def pie_qs() -> None:
 def pie_type(point: int) -> str:
     """Returns user's pie-type."""
     if point > 200:
-        return "Congratulations, You are a Pumpkin-pie!!!"
+        return f"Congratulations, You are a Pumpkin-pie {SMILE_FACE}"
     elif point < 20: 
-        return "Congratulations, You are an Apple-pie!!!"
+        return f"Congratulations, You are an Apple-pie {SMILE_FACE}"
     elif point < 30:
-        return "Congratulations, You are a Chicken pot-pie!!!"
+        return f"Congratulations, You are a Chicken pot-pie {SMILE_FACE}"
     elif point < 40:
-        return "Sorry, You are a Cranberry-pie."
+        return f"Sorry, You are a Cranberry-pie {LAME_FACE}"
     elif point < 50:
-        return "Sorry, You are a Pecan-pie."
+        return f"Sorry, You are a Pecan-pie {LAME_FACE}"
 
 def cream_qs(ice_points: int) -> int:
     """Returns user's score for ice cream evalutaion."""
@@ -68,26 +70,36 @@ def cream_type(points: int) -> str:
     """Returns correct ice cream type."""
     global player
     if points > 100:
-        return f"Sorry, {player}, unfortunately you are Strawberry ice-cream."
+        return f"Sorry, {player}, unfortunately you are Strawberry ice-cream {LAME_FACE}"
     else:
         if randint(1, 2) == 2:
-            return f"Congrats!!! {player}, you are Vanilla ice-cream!!"
+            return f"Congrats!!! {player}, you are Vanilla ice-cream {SMILE_FACE}"
         else:
-            return f"Congrats!!! {player}, you are Chocolate ice-cream!!"
+            return f"Congrats!!! {player}, you are Chocolate ice-cream {SMILE_FACE}"
 
 
 def main() -> None:
     global points
+    i = 0
     greet()
     exp_route: str = input("Enter \"1\" if you would like to find your pie-type, \"2\" for your ice-cream type, or \"3\" to end your experience: ")
-    if exp_route == "1":
-        pie_qs()
-        print(pie_type(points))
-    if exp_route == "2":
-        print(cream_type(cream_qs(points)))
-    if exp_route == "3":
-        print(f"Goodbye {player}, your accumulated a total of {points} quiz points throughout your experience.")
-        
+    while i < 1:
+        if exp_route == "1":
+            points = 0
+            pie_qs()
+            print(pie_type(points))
+            print(f"Total Quiz Points: {points}")
+            exp_route = input("Press \"1\" to retake the pie quiz, \"2\" to take the ice-cream quiz, or \"3\" to end your experience: ")
+        if exp_route == "2":
+            points = 0
+            points += cream_qs(points)
+            print(cream_type(points))
+            print(f"Total Quiz Points: {points}")
+            exp_route = input("Press \"1\" to take the pie quiz, \"2\" to retake the ice-cream quiz, or \"3\" to end your experience: ")
+        if exp_route == "3":
+            print(f"Goodbye {player}, you accumulated a total of {points} quiz points throughout your experience.")
+            i = 1
+    print(f"Thank you for playing, {player}.")
         
 
 
