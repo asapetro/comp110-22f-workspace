@@ -1,12 +1,14 @@
-"""Buzzfeed pie quiz."""
+"""EX06 Buzzfeed pie quiz."""
 
+__author__ = "730575054"
 
+from random import randint
 points: int = 0
 player: str = ""
-from random import randint
 
 SMILE_FACE: str = "\U0001f600"
 LAME_FACE: str = "\U0001F612"
+
 
 def greet() -> None:
     """Greets player."""
@@ -15,8 +17,9 @@ def greet() -> None:
     player = input("Enter your name: ")
     print(f"You may begin, {player}!")
 
+
 def pie_qs() -> None:
-    """Returns the user's score."""
+    """Adds points from questions to global points."""
     global points
     seasons_q: str = input("True or False: Fall is the best season? ")
     if seasons_q == "True":
@@ -48,16 +51,17 @@ def pie_type(point: int) -> str:
     elif point < 50:
         return f"Sorry, You are a Pecan-pie {LAME_FACE}"
 
+
 def cream_qs(ice_points: int) -> int:
     """Returns user's score for ice cream evalutaion."""
     global player
-    fav_mat: str = input("Do you prefer a leather couch to a cotton one? Respond with \"Yes\" or \"No\": ")
+    fav_mat: str = input(f"Do you, {player}, prefer a leather couch to a cotton one? Respond with \"Yes\" or \"No\": ")
     if fav_mat == "Yes":
         ice_points += 10
     fav_clothe: str = input("What percentage of winter days do you wear a hoodie(no zipper) as opposed to a jacket? A) <25% B) 25-50% C) >50%. Enter corresponding letter: ")
     if fav_clothe == "A":
         ice_points += 10
-    if fav_clothe  == "B":
+    if fav_clothe == "B":
         ice_points += 30
     if fav_clothe == "C":
         ice_points += 60
@@ -65,6 +69,7 @@ def cream_qs(ice_points: int) -> int:
     if slush_points > 5:
         ice_points += 60
     return ice_points
+
 
 def cream_type(points: int) -> str:
     """Returns correct ice cream type."""
@@ -79,6 +84,7 @@ def cream_type(points: int) -> str:
 
 
 def main() -> None:
+    """Begins the program."""
     global points
     i = 0
     greet()
@@ -100,7 +106,6 @@ def main() -> None:
             print(f"Goodbye {player}, you accumulated a total of {points} quiz points throughout your experience.")
             i = 1
     print(f"Thank you for playing, {player}.")
-        
 
 
 if __name__ == "__main__":
