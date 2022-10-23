@@ -3,6 +3,7 @@
 __author__ = "730575054"
 
 from random import randint
+
 points: int = 0
 player: str = ""
 
