@@ -98,11 +98,19 @@ class Model:
 
     population: list[Cell]
     time: int = 0
-    immune_num: int = 0
 
     def __init__(self, cells: int, speed: float, infect_num: int, immune_num: int = 0):
         """Initialize the cells with random locations and directions."""
         self.population = []
+        if infect_num >= cells:
+            raise ValueError("Some number of cells must be uninfected.")
+        if infect_num <= 0:
+            raise ValueError("Some number of cells must be infected.")
+        if immune_num >= cells:
+            raise ValueError("Some number of cells must be unimmune.")
+        if immune_num < 0:
+            raise ValueError("Some number of cells must be immmune.")
+
         for i in range(0, cells):
             start_location: Point = self.random_location()
             start_direction: Point = self.random_direction(speed)
@@ -113,15 +121,6 @@ class Model:
         for e in range(infect_num, infect_num + immune_num):
             self.population[e].immunize()
 
-        if infect_num >= cells:
-            raise ValueError("Some number of cells must be uninfected.")
-        if infect_num <= 0:
-            raise ValueError("Some number of cells must be infected.")
-        if immune_num >= cells:
-            raise ValueError("Some number of cells must be unimmune.")
-        if immune_num <= 0:
-            raise ValueError("Some number of cells must be immmune.")
-    
     def tick(self) -> None:
         """Update the state of the simulation by one time step."""
         self.time += 1
